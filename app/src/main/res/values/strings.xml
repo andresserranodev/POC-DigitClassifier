@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name" translatable="false">DigitClassifier</string>
+
+    <string name="clear_button_text">Restart</string>
+    <string name="identify_button_text">Identify Number</string>
+    <string name="prediction_text_placeholder">Please draw a number between 0 and 9</string>
+    <string name="classification_success_message">Model result,predicted number:</string>
+    <string name="prediction_error_message">The model can\'t predicting the number.</string>
+    <string name="prediction_error_details">Please redraw the number or add more details to the drawing.</string>
+    <string name="dialog_close_button">Close</string>
+    <string name="dialog_redraw_button">Re-draw</string>
+    <string name="confidence_result_message">Confidence: %1f</string>
+
+
+</resources>
