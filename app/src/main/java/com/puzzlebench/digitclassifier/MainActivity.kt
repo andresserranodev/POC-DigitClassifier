@@ -7,47 +7,23 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.ExperimentalComposeApi
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.unit.dp
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tflite.java.TfLite
 import com.puzzlebench.digitclassifier.tensorflowlite.DigitClassifier.Companion.TAG
-import com.puzzlebench.digitclassifier.compose.DrawingBoard
-import com.puzzlebench.digitclassifier.compose.ErrorDialog
-import com.puzzlebench.digitclassifier.compose.Line
-import com.puzzlebench.digitclassifier.compose.PredictionResults
-import com.puzzlebench.digitclassifier.compose.TitleMessage
 import com.puzzlebench.digitclassifier.tensorflowlite.DigitClassifier
+import com.puzzlebench.digitclassifier.ui.feature.ClassifierScreen
 import com.puzzlebench.digitclassifier.ui.feature.viewModel.ClassifierUiAction
-import com.puzzlebench.digitclassifier.ui.feature.viewModel.ClassifierUiState
 import com.puzzlebench.digitclassifier.ui.feature.viewModel.ClassifierViewModel
 import com.puzzlebench.digitclassifier.ui.theme.DigitClassifierTheme
-import dev.shreyaspatil.capturable.capturable
-import dev.shreyaspatil.capturable.controller.rememberCaptureController
-import kotlinx.coroutines.launch
 import kotlin.getValue
 
 const val DEFAULT_VALUE_PREDICTED_NUMBER = -1
@@ -84,112 +60,30 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
-            val captureController = rememberCaptureController()
-            val scope = rememberCoroutineScope()
-
-            val drewLinesState = remember { mutableStateListOf<Line>() }
-            var predictionResultState by rememberSaveable {
-                mutableIntStateOf(
-                    DEFAULT_VALUE_PREDICTED_NUMBER
-                )
-            }
-            var confidenceResultState: Float by rememberSaveable { mutableFloatStateOf(-1f) }
-            var isClassifyButtonVisible by rememberSaveable { mutableStateOf(false) }
-            var openAlertDialog by rememberSaveable { mutableStateOf(false) }
 
             val uiState by classifierViewModel.classifierUiState.collectAsState()
             val uiAction = classifierViewModel::onUiAction
 
-            when (uiState) {
-                is ClassifierUiState.Success -> {
-                    confidenceResultState =
-                        (uiState as ClassifierUiState.Success).classifierResult.confidence
-                    predictionResultState =
-                        (uiState as ClassifierUiState.Success).classifierResult.number
-                }
-
-                is ClassifierUiState.ShowErrorDialog -> {
-                    openAlertDialog = true
-                }
-
-                is ClassifierUiState.Default -> {
-                    drewLinesState.clear()
-                    predictionResultState = DEFAULT_VALUE_PREDICTED_NUMBER
-                    confidenceResultState = -1f
-                    isClassifyButtonVisible = false
-                    openAlertDialog = false
-                }
-
-                is ClassifierUiState.ReadyToIdentify -> {
-                    isClassifyButtonVisible = true
-                }
-
-                ClassifierUiState.HideErrorDialog -> {
-                    openAlertDialog = false
-                }
-
-                is ClassifierUiState.IdentifyImage ->{
-                    classifyDrawing((uiState as ClassifierUiState.IdentifyImage).bitmap)
-                }
-            }
-
             DigitClassifierTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
-                    Column(
-                        modifier = Modifier.padding(innerPadding),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        TitleMessage(
-                            modifier = Modifier
-                                .padding(innerPadding)
-                                .align(Alignment.CenterHorizontally)
-                        )
-                        DrawingBoard(
-                            modifier = Modifier.capturable(captureController),
-                            onDragEnd = { uiAction(ClassifierUiAction.OnReadyToIdentifyNumber) },
-                            linesState = drewLinesState
-                        )
-                        Row(
-                            horizontalArrangement = Arrangement.spacedBy(
-                                8.dp,
-                                Alignment.CenterHorizontally
-                            ),
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(top = 15.dp)
-                        ) {
-                            Button(
-                                onClick = { uiAction(ClassifierUiAction.OnRestart) }) {
-                                Text(getString(R.string.clear_button_text))
-                            }
-                            if (isClassifyButtonVisible) {
-                                Button(
-                                    onClick = {
-                                        scope.launch {
-                                            uiAction(ClassifierUiAction.OnIdentifyBitmap(captureController.captureAsync().await()))
-                                        }
-                                    }) {
-                                    Text(getString(R.string.identify_button_text))
-                                }
-                            }
-                        }
-
-
-                        PredictionResults(
-                            predictedNumber = predictionResultState,
-                            confidence = confidenceResultState
-                        )
-                        ErrorDialog(
-                            openAlertDialog,
-                            onDismissRequest = { uiAction(ClassifierUiAction.OnCloseErrorDialog) },
-                            reDrawButtonClick = { uiAction(ClassifierUiAction.OnRestart) })
-                    }
+                    ClassifierScreen(modifier = Modifier.padding(innerPadding),
+                        uiState = uiState,
+                        restartButtonClicked = { uiAction(ClassifierUiAction.OnRestart) },
+                        identifyButtonClicked = { bitmap ->
+                            uiAction(
+                                ClassifierUiAction.OnIdentifyBitmap(
+                                    bitmap
+                                )
+                            )
+                        },
+                        dismissButtonClicked = { uiAction(ClassifierUiAction.OnCloseErrorDialog) },
+                        onDragEnd = { uiAction(ClassifierUiAction.OnReadyToIdentifyNumber) },
+                        onClassifyImage = { bitmap -> classifyDrawing(bitmap) }
+                    )
                 }
-
             }
         }
-
     }
 
     private fun classifyDrawing(bitmap: ImageBitmap) {
