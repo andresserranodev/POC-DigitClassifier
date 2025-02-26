@@ -1,4 +1,4 @@
-package com.puzzlebench.digitclassifier.compose
+package com.puzzlebench.digitclassifier.ui.compose
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background

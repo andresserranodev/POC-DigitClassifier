@@ -26,11 +26,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.puzzlebench.digitclassifier.DEFAULT_VALUE_PREDICTED_NUMBER
 import com.puzzlebench.digitclassifier.R
-import com.puzzlebench.digitclassifier.compose.DrawingBoard
-import com.puzzlebench.digitclassifier.compose.ErrorDialog
-import com.puzzlebench.digitclassifier.compose.Line
-import com.puzzlebench.digitclassifier.compose.PredictionResults
-import com.puzzlebench.digitclassifier.compose.TitleMessage
+import com.puzzlebench.digitclassifier.ui.compose.DrawingBoard
+import com.puzzlebench.digitclassifier.ui.compose.ErrorDialog
+import com.puzzlebench.digitclassifier.ui.compose.Line
+import com.puzzlebench.digitclassifier.ui.compose.PredictionResults
+import com.puzzlebench.digitclassifier.ui.compose.TitleMessage
 import com.puzzlebench.digitclassifier.ui.feature.viewModel.ClassifierUiState
 import dev.shreyaspatil.capturable.capturable
 import dev.shreyaspatil.capturable.controller.rememberCaptureController
