@@ -21,6 +21,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewFontScale
+import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.puzzlebench.digitclassifier.ui.theme.DigitClassifierTheme
@@ -88,16 +91,8 @@ fun ErrorDialog(
     }
 }
 
-@Preview(name = "Night Mode",
-    showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES)
-
-@Preview(name = "Night Mode",
-    showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_NO)
-annotation class ThemePreviews
-
-@ThemePreviews
+@PreviewLightDark
+@PreviewFontScale
 @Composable
 fun ErrorDialogPreview() {
     DigitClassifierTheme {
