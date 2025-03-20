@@ -23,6 +23,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.puzzlebench.digitclassifier.DEFAULT_VALUE_PREDICTED_NUMBER
 import com.puzzlebench.digitclassifier.R
@@ -60,7 +61,6 @@ fun ClassifierScreen(
     var confidenceResultState: Float by rememberSaveable { mutableFloatStateOf(-1f) }
     var isClassifyButtonVisible by rememberSaveable { mutableStateOf(false) }
     var openAlertDialog by rememberSaveable { mutableStateOf(false) }
-
 
     when (uiState) {
         is ClassifierUiState.Success -> {
@@ -143,4 +143,15 @@ fun ClassifierScreen(
             onDismissRequest = { dismissButtonClicked() },
             reDrawButtonClick = { restartButtonClicked() })
     }
+}
+@Preview(showBackground = true)
+@Composable
+fun PreviewTitleMessage() {
+    ClassifierScreen(modifier = Modifier,
+        uiState = ClassifierUiState.Default,
+        restartButtonClicked = {},
+        identifyButtonClicked = {},
+        dismissButtonClicked = {},
+        onDragEnd = {},
+        onClassifyImage = {})
 }

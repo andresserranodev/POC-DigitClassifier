@@ -3,6 +3,7 @@ package com.puzzlebench.digitclassifier
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -44,7 +45,7 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalComposeUiApi::class, ExperimentalComposeApi::class)
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
-
+        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
         initializeTasks.addOnSuccessListener {
             Log.d(TAG, "TensorFlow Lite initialized successfully.")
             // Setup digit classifier.

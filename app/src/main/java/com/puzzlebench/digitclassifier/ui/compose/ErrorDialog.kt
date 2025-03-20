@@ -88,17 +88,18 @@ fun ErrorDialog(
     }
 }
 
-@Preview
+@Preview(name = "Night Mode",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_YES)
+
+@Preview(name = "Night Mode",
+    showBackground = true,
+    uiMode = Configuration.UI_MODE_NIGHT_NO)
+annotation class ThemePreviews
+
+@ThemePreviews
 @Composable
 fun ErrorDialogPreview() {
-    DigitClassifierTheme {
-        ErrorDialog(true, {}, {})
-    }
-}
-
-@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
-@Composable
-fun ErrorDialogPreviewDarkMode() {
     DigitClassifierTheme {
         ErrorDialog(true, {}, {})
     }
