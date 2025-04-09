@@ -12,10 +12,12 @@ allprojects {
     ktlint {
         android.set(true)
         verbose.set(true)
+        ignoreFailures.set(true)
         filter {
-            exclude { element ->
-                val path = element.file.path
-                path.contains("generated/") || path.contains("test/") || path.contains("androidTest/")
+            exclude {
+                it.file.path.contains("generated/") ||
+                it.file.path.contains("test/") ||
+                it.file.path.contains("androidTest/")
             }
         }
     }

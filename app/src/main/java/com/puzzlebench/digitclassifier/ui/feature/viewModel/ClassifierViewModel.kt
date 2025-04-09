@@ -20,10 +20,15 @@ class ClassifierViewModel : ViewModel() {
 
     fun onUiAction(action: ClassifierUiAction) {
         _classifierUiState.value = when (action) {
-            is ClassifierUiAction.OnReadyToIdentifyNumber -> ClassifierUiState.ReadyToIdentify
-            is ClassifierUiAction.OnRestart, is ClassifierUiAction.OnReDraw -> ClassifierUiState.Default
-            is ClassifierUiAction.OnCloseErrorDialog -> ClassifierUiState.HideErrorDialog
-            is ClassifierUiAction.OnIdentifyBitmap -> ClassifierUiState.IdentifyImage(bitmap = action.bitmap)
+            is ClassifierUiAction.OnReadyToIdentifyNumber ->
+                ClassifierUiState.ReadyToIdentify
+            is ClassifierUiAction.OnRestart,
+            is ClassifierUiAction.OnReDraw ->
+                ClassifierUiState.Default
+            is ClassifierUiAction.OnCloseErrorDialog ->
+                ClassifierUiState.HideErrorDialog
+            is ClassifierUiAction.OnIdentifyBitmap ->
+                ClassifierUiState.IdentifyImage(bitmap = action.bitmap)
         }
     }
 }
