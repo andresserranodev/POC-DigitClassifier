@@ -1,6 +1,7 @@
 
 [![CI](https://github.com/andresserranodev/POC-DigitClassifier/actions/workflows/CI.yml/badge.svg)](https://github.com/andresserranodev/POC-DigitClassifier/actions/workflows/CI.yml)
 [![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io)
+[![CodeFactor](https://www.codefactor.io/repository/github/andresserranodev/poc-digitclassifier/badge/main)](https://www.codefactor.io/repository/github/andresserranodev/poc-digitclassifier/overview/main)
 
 # Digit Classifier Android App
 
