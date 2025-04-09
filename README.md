@@ -6,6 +6,10 @@ This repository contains an Android application that demonstrates the implementa
 
 The application is built using Jetpack Compose and implements a CNN model trained on the MNIST dataset. The model was trained using Google Colab, and the resulting TensorFlow Lite model is integrated into the Android application.
 
+## Preview
+
+<img src="/previews/preview.gif" align="right" width="320"/>
+
 ## Features
 
 - Modern UI built with Jetpack Compose
