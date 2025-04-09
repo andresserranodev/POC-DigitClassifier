@@ -28,7 +28,48 @@ jobs:
 
     - name: Run Unit Tests
       run: ./gradlew test
+name: Android Tests
 
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+        cache: gradle
+
+    - name: Setup Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Configurar ANDROID_HOME
+      run: echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
+
+    - name: Crear local.properties
+      run: echo "sdk.dir=$ANDROID_SDK_ROOT" > ./local.properties
+
+    - name: Setup Gradle
+      uses: gradle/gradle-build-action@v2
+
+    - name: Run Unit Tests
+      run: ./gradlew test
+
+    - name: Run sanity build
+      run: ./gradlew assemble
+      env:
+        ANDROID_HOME: ${{ secrets.ANDROID_HOME }}
+        ANDROID_SDK_ROOT: ${{ secrets.ANDROID_SDK_ROOT }}
     - name: Run sanity build
       run: ./gradlew assemble
       env:
