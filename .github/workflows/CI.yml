@@ -59,13 +59,14 @@ jobs:
 
     - name: Start Android Emulator
       run: |
-        echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-30;google_apis;x86_64"
+        export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+        echo "no" | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd -n test -k "system-images;android-30;google_apis;x86_64" --device "pixel"
         $ANDROID_HOME/emulator/emulator -avd test -no-snapshot -no-audio -no-window &
         adb wait-for-device
         adb shell input keyevent 82
       env:
-        ANDROID_HOME: ${{ secrets.ANDROID_HOME }}
-        ANDROID_SDK_ROOT: ${{ secrets.ANDROID_SDK_ROOT }}
+        ANDROID_HOME: $HOME/android-sdk
+        ANDROID_SDK_ROOT: $HOME/android-sdk
 
     - name: Run Android Tests
       run: ./gradlew connectedAndroidTest
