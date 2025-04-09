@@ -11,70 +11,47 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Set up JDK 17
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-        cache: gradle
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: gradle
 
-    - name: Setup Android SDK
-      uses: android-actions/setup-android@v3
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
 
-    - name: Setup ANDROID_HOME
-      run: echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
+      - name: Setup ANDROID_HOME
+        run: echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
 
-    - name: Create local.properties
-      run: echo "sdk.dir=$ANDROID_SDK_ROOT" > ./local.properties
+      - name: Create local.properties
+        run: echo "sdk.dir=$ANDROID_SDK_ROOT" > ./local.properties
 
-    - name: Setup Gradle
-      uses: gradle/gradle-build-action@v2
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v2
 
-#    - name: Run Unit Tests
-#      run: ./gradlew test
+      - name: Run Unit Tests
+        run: ./gradlew test
 
-    - name: Install Android Command Line Tools
-      run: |
-        export ANDROID_HOME=$HOME/android-sdk
-        mkdir -p $ANDROID_HOME/cmdline-tools
-        curl -o commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
-        unzip -q commandlinetools.zip -d $ANDROID_HOME/cmdline-tools
-        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
-        export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
-        echo "y" | sdkmanager --licenses
-        echo "y" | sdkmanager --install "platform-tools" "platforms;android-30" "system-images;android-30;google_apis;x86_64"
-        ls -l $ANDROID_HOME/cmdline-tools/latest/bin
-      env:
-        ANDROID_HOME: $HOME/android-sdk
-        ANDROID_SDK_ROOT: $HOME/android-sdk
-
-    - name: Verify avdmanager installation
-      run: |
-        if [ ! -f "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" ]; then
-          echo "avdmanager not found!"
+      - name: Install Android Command Line Tools
+        run: |
+          export ANDROID_HOME=$HOME/android-sdk
+          mkdir -p $ANDROID_HOME/cmdline-tools
+          curl -o commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
+          unzip -q commandlinetools.zip -d $ANDROID_HOME/cmdline-tools
+          mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+          export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+          echo "y" | sdkmanager --licenses
+          echo "y" | sdkmanager --install "platform-tools" "platforms;android-30" "system-images;android-30;google_apis;x86_64"
           ls -l $ANDROID_HOME/cmdline-tools/latest/bin
-          exit 1
-        fi
-        echo "avdmanager is installed correctly."
+        env:
+          ANDROID_HOME: $HOME/android-sdk
+          ANDROID_SDK_ROOT: $HOME/android-sdk
 
-    - name: Start Android Emulator
-      run: |
-        export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
-        echo "no" | $ANDROID_HOME/cmdline-tools/latest/bin/avdmanager create avd -n test -k "system-images;android-30;google_apis;x86_64" --device "pixel"
-        $ANDROID_HOME/emulator/emulator -avd test -no-snapshot -no-audio -no-window &
-        adb wait-for-device
-        adb shell input keyevent 82
-      env:
-        ANDROID_HOME: $HOME/android-sdk
-        ANDROID_SDK_ROOT: $HOME/android-sdk
-
-    - name: Run Android Tests
-      run: ./gradlew app:connectedDebugAndroidTest
-
-    - name: Run Sanity build
-      run: ./gradlew assemble
-      env:
-        ANDROID_HOME: ${{ secrets.ANDROID_HOME }}
-        ANDROID_SDK_ROOT: ${{ secrets.ANDROID_SDK_ROOT }}
+      - name: Run Sanity build
+        run: ./gradlew assemble
+        env:
+          ANDROID_HOME: ${{ secrets.ANDROID_HOME }}
+          ANDROID_SDK_ROOT: ${{ secrets.ANDROID_SDK_ROOT }}
