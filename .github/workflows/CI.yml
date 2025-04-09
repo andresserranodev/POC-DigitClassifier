@@ -35,6 +35,16 @@ jobs:
     - name: Run Unit Tests
       run: ./gradlew test
 
+    - name: Install Android Command Line Tools
+      run: |
+        mkdir -p $ANDROID_HOME/cmdline-tools
+        curl -o commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
+        unzip commandlinetools.zip -d $ANDROID_HOME/cmdline-tools
+        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+      env:
+        ANDROID_HOME: ${{ secrets.ANDROID_HOME }}
+        ANDROID_SDK_ROOT: ${{ secrets.ANDROID_SDK_ROOT }}
+
     - name: Start Android Emulator
       run: |
         echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-30;google_apis;x86_64"
