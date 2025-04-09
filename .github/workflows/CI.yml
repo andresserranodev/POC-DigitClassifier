@@ -1,4 +1,4 @@
-name: Android Tests
+name: CI POC-DigitClassifier
 
 on:
   push:
@@ -37,6 +37,11 @@ jobs:
 
       - name: Run Ktlint
         run: ./gradlew ktlintCheck
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: Install Android Command Line Tools
         run: |
