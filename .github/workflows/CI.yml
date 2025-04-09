@@ -37,17 +37,18 @@ jobs:
 
     - name: Install Android Command Line Tools
       run: |
-        export ANDROID_HOME=$HOME/android-sdk
-        mkdir -p $ANDROID_HOME/cmdline-tools
-        curl -o commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
-        unzip -q commandlinetools.zip -d $ANDROID_HOME/cmdline-tools
-        mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
-        export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
-        echo "y" | sdkmanager --licenses
-        echo "y" | sdkmanager --install "platform-tools" "platforms;android-30" "system-images;android-30;google_apis;x86_64"
+          export ANDROID_HOME=$HOME/android-sdk
+          mkdir -p $ANDROID_HOME/cmdline-tools
+          curl -o commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
+          unzip -q commandlinetools.zip -d $ANDROID_HOME/cmdline-tools
+          mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+          export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+          echo "y" | sdkmanager --licenses
+          echo "y" | sdkmanager --install "platform-tools" "platforms;android-30" "system-images;android-30;google_apis;x86_64"
+          ls -l $ANDROID_HOME/cmdline-tools/latest/bin
       env:
-        ANDROID_HOME: $HOME/android-sdk
-        ANDROID_SDK_ROOT: $HOME/android-sdk
+          ANDROID_HOME: $HOME/android-sdk
+          ANDROID_SDK_ROOT: $HOME/android-sdk
 
     - name: Verify sdkmanager installation
       run: |
