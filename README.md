@@ -1,3 +1,7 @@
+
+[![CI](https://github.com/andresserranodev/POC-DigitClassifier/actions/workflows/CI.yml/badge.svg)](https://github.com/andresserranodev/POC-DigitClassifier/actions/workflows/CI.yml)
+[![ktlint](https://img.shields.io/badge/code%20style-%E2%9D%A4-FF4081.svg)](https://ktlint.github.io)
+
 # Digit Classifier Android App
 
 This repository contains an Android application that demonstrates the implementation of a Convolutional Neural Network (CNN) for handwritten digit classification. The project serves educational purposes, showcasing how to train a neural network and integrate it into an Android application.
