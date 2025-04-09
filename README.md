@@ -1,14 +1,14 @@
 # Digit Classifier Android App
 
 This repository contains an Android application that demonstrates the implementation of a Convolutional Neural Network (CNN) for handwritten digit classification. The project serves educational purposes, showcasing how to train a neural network and integrate it into an Android application.
+[PPP](https://docs.google.com/presentation/d/1s2gGfQZfQN1WPaiPBY6wjbwxg20DGCKVFaIyTeB805A/edit?usp=sharing)
 
 ## Overview
 
 The application is built using Jetpack Compose and implements a CNN model trained on the MNIST dataset. The model was trained using Google Colab, and the resulting TensorFlow Lite model is integrated into the Android application.
 
 ## Preview
-
-<img src="/previews/preview.gif" align="right" width="320"/>
+![Preview](https://github.com/andresserranodev/POC-DigitClassifier/blob/main/previews/preview.gif)
 
 ## Features
 
@@ -51,14 +51,15 @@ The project uses the following main dependencies:
 
 This project was inspired by various sources and learning materials:
 
-1. A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence
-2. Levels of AGI for Operationalizing Progress on the Path to AGI
-3. Build a handwritten digit classifier app with TensorFlow Lite
-4. Google Machine Learning Crash Course
-5. APRENDE ¿Qué son las Redes Neuronales? de Dot CSV
-6. Introduction to Generative AI
-7. The Impact of Generative AI on Critical Thinking
-8. Ask a Techspert: What is generative AI?
+1. [A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence](http://jmc.stanford.edu/articles/dartmouth.html)
+2. [Levels of AGI for Operationalizing Progress on the Path to AGI](https://arxiv.org/abs/2311.02462)
+3. [Build a handwritten digit classifier app with TensorFlow Lite](https://developer.android.com/codelabs/digit-classifier-tflite#4)
+4. [Google Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course)
+5. [APRENDE ¿Qué son las Redes Neuronales? de Dot CSV](https://www.youtube.com/playlist?list=PL-Ogd76BhmcB9OjPucsnc2-piEE96jJDQ)
+6. [Introduction to Generative AI](https://www.cloudskillsboost.google/paths/118/course_templates/536)
+7. [The Impact of Generative AI on Critical Thinking](https://www.microsoft.com/en-us/research/publication/the-impact-of-generative-ai-on-critical-thinking-self-reported-reductions-in-cognitive-effort-and-confidence-effects-from-a-survey-of-knowledge-workers/)
+8. [Ask a Techspert: What is generative AI?](https://blog.google/inside-google/googlers/ask-a-techspert/what-is-generative-ai/)
+9. [Con Jetpack Compose , lleva el desarrollo de interfaces al siguiente nivel](https://devexpert.io/compose-expert/)
 
 ## License
 
