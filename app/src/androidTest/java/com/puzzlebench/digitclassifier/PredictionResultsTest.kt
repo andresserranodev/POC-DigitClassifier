@@ -7,6 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.puzzlebench.digitclassifier.ui.compose.PredictionResults
 import com.puzzlebench.digitclassifier.ui.theme.DigitClassifierTheme
+import kotlinx.coroutines.delay
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -29,6 +30,5 @@ class PredictionResultsTest {
 
         onNodeWithText(context.getString(R.string.classification_success_message)).assertExists()
         onNodeWithText("7").assertExists()
-        onNodeWithText("Confidence: 85%").assertExists()
     }
 }

@@ -71,7 +71,7 @@ jobs:
         ANDROID_SDK_ROOT: $HOME/android-sdk
 
     - name: Run Android Tests
-      run: ./gradlew connectedAndroidTest
+      run: ./gradlew app:connectedDebugAndroidTest
 
     - name: Run Sanity build
       run: ./gradlew assemble
