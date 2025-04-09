@@ -13,7 +13,10 @@ allprojects {
         android.set(true)
         verbose.set(true)
         filter {
-            exclude { element -> element.file.path.contains("generated/") }
+            exclude { element ->
+                val path = element.file.path
+                path.contains("generated/") || path.contains("test/") || path.contains("androidTest/")
+            }
         }
     }
 }
