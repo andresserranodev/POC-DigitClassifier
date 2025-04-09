@@ -35,10 +35,17 @@ jobs:
     - name: Run Unit Tests
       run: ./gradlew test
 
+    - name: Start Android Emulator
+      run: |
+        echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-30;google_apis;x86_64"
+        $ANDROID_HOME/emulator/emulator -avd test -no-snapshot -no-audio -no-window &
+        adb wait-for-device
+        adb shell input keyevent 82
+
     - name: Run Android Tests
       run: ./gradlew connectedAndroidTest
 
-    - name: Run sanity build
+    - name: Run Sanity build
       run: ./gradlew assemble
       env:
         ANDROID_HOME: ${{ secrets.ANDROID_HOME }}
