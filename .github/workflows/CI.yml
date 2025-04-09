@@ -44,6 +44,7 @@ jobs:
           mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
           export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
           echo "y" | sdkmanager --licenses
+          echo "y" | sdkmanager --install "platform-tools" "platforms;android-30"
       env:
           ANDROID_HOME: $HOME/android-sdk
           ANDROID_SDK_ROOT: $HOME/android-sdk
