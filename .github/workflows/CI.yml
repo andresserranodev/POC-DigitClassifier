@@ -49,6 +49,14 @@ jobs:
         ANDROID_HOME: $HOME/android-sdk
         ANDROID_SDK_ROOT: $HOME/android-sdk
 
+    - name: Verify sdkmanager installation
+      run: |
+        if [ ! -f "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" ]; then
+          echo "sdkmanager not found!"
+          exit 1
+        fi
+        echo "sdkmanager is installed correctly."
+
     - name: Start Android Emulator
       run: |
         echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --install "system-images;android-30;google_apis;x86_64"
