@@ -37,7 +37,6 @@ import dev.shreyaspatil.capturable.capturable
 import dev.shreyaspatil.capturable.controller.rememberCaptureController
 import kotlinx.coroutines.launch
 
-
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalComposeApi::class)
 @Composable
 fun ClassifierScreen(
@@ -47,7 +46,7 @@ fun ClassifierScreen(
     identifyButtonClicked: (ImageBitmap) -> Unit,
     dismissButtonClicked: () -> Unit,
     onDragEnd: () -> Unit,
-    onClassifyImage: (ImageBitmap) -> Unit,
+    onClassifyImage: (ImageBitmap) -> Unit
 ) {
     val captureController = rememberCaptureController()
     val scope = rememberCoroutineScope()
@@ -90,7 +89,7 @@ fun ClassifierScreen(
             openAlertDialog = false
         }
 
-        is ClassifierUiState.IdentifyImage ->{
+        is ClassifierUiState.IdentifyImage -> {
             onClassifyImage(uiState.bitmap)
         }
     }
@@ -118,7 +117,8 @@ fun ClassifierScreen(
                 .padding(top = 15.dp)
         ) {
             Button(
-                onClick = { restartButtonClicked() }) {
+                onClick = { restartButtonClicked() }
+            ) {
                 Text(stringResource(R.string.clear_button_text))
             }
             if (isClassifyButtonVisible) {
@@ -127,12 +127,12 @@ fun ClassifierScreen(
                         scope.launch {
                             identifyButtonClicked(captureController.captureAsync().await())
                         }
-                    }) {
+                    }
+                ) {
                     Text(stringResource(R.string.identify_button_text))
                 }
             }
         }
-
 
         PredictionResults(
             predictedNumber = predictionResultState,
@@ -141,17 +141,21 @@ fun ClassifierScreen(
         ErrorDialog(
             openAlertDialog,
             onDismissRequest = { dismissButtonClicked() },
-            reDrawButtonClick = { restartButtonClicked() })
+            reDrawButtonClick = { restartButtonClicked() }
+        )
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 fun PreviewTitleMessage() {
-    ClassifierScreen(modifier = Modifier,
+    ClassifierScreen(
+        modifier = Modifier,
         uiState = ClassifierUiState.Default,
         restartButtonClicked = {},
         identifyButtonClicked = {},
         dismissButtonClicked = {},
         onDragEnd = {},
-        onClassifyImage = {})
+        onClassifyImage = {}
+    )
 }

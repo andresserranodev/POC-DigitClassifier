@@ -2,10 +2,9 @@ package com.puzzlebench.digitclassifier.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.font.FontFamily
-import com.puzzlebench.digitclassifier.R
-
-import androidx.compose.ui.text.googlefonts.GoogleFont
 import androidx.compose.ui.text.googlefonts.Font
+import androidx.compose.ui.text.googlefonts.GoogleFont
+import com.puzzlebench.digitclassifier.R
 
 val provider = GoogleFont.Provider(
     providerAuthority = "com.google.android.gms.fonts",
@@ -16,14 +15,14 @@ val provider = GoogleFont.Provider(
 val bodyFontFamily = FontFamily(
     Font(
         googleFont = GoogleFont("ADLaM Display"),
-        fontProvider = provider,
+        fontProvider = provider
     )
 )
 
 val displayFontFamily = FontFamily(
     Font(
         googleFont = GoogleFont("ADLaM Display"),
-        fontProvider = provider,
+        fontProvider = provider
     )
 )
 
@@ -45,6 +44,5 @@ val AppTypography = Typography(
     bodySmall = baseline.bodySmall.copy(fontFamily = bodyFontFamily),
     labelLarge = baseline.labelLarge.copy(fontFamily = bodyFontFamily),
     labelMedium = baseline.labelMedium.copy(fontFamily = bodyFontFamily),
-    labelSmall = baseline.labelSmall.copy(fontFamily = bodyFontFamily),
+    labelSmall = baseline.labelSmall.copy(fontFamily = bodyFontFamily)
 )
-

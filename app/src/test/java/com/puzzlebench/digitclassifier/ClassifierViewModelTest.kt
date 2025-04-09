@@ -57,7 +57,7 @@ class ClassifierViewModelTest {
     @Test
     fun onUiAction_GivenOnRestart_WhenCalled_ThenDefaultState() = runTest {
         // Given the current state is not default (simulate by setting a different state)
-        viewModel.validatePredictedNumber(5, 1.5f)  // Success state
+        viewModel.validatePredictedNumber(5, 1.5f) // Success state
 
         // When onUiAction is called with OnRestart
         viewModel.onUiAction(ClassifierUiAction.OnRestart)
@@ -95,7 +95,7 @@ class ClassifierViewModelTest {
     @Test
     fun onUiAction_GivenOnReDraw_WhenCalled_ThenDefaultState() = runTest {
         // Given the current state is not default (simulate by setting a different state)
-        viewModel.validatePredictedNumber(5, 1.5f)  // Success state
+        viewModel.validatePredictedNumber(5, 1.5f) // Success state
 
         // When onUiAction is called with OnReDraw
         viewModel.onUiAction(ClassifierUiAction.OnReDraw)

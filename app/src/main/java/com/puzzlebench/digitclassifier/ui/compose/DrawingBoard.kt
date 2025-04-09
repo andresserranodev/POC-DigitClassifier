@@ -15,40 +15,42 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun DrawingBoard(modifier: Modifier,
-                 onDragEnd: () -> Unit,
-                 linesState: MutableList<Line>) {
-        Canvas(
-            modifier = modifier
-                .size(width = 400.dp, height = 400.dp)
-                .background(Color.Black)
-                .pointerInput(true) {
-                    detectDragGestures(onDrag = { change, dragAmount ->
-                        change.consume()
+fun DrawingBoard(
+    modifier: Modifier,
+    onDragEnd: () -> Unit,
+    linesState: MutableList<Line>
+) {
+    Canvas(
+        modifier = modifier
+            .size(width = 400.dp, height = 400.dp)
+            .background(Color.Black)
+            .pointerInput(true) {
+                detectDragGestures(onDrag = { change, dragAmount ->
+                    change.consume()
 
-                        val line = Line(
-                            start = change.position - dragAmount,
-                            end = change.position
-                        )
+                    val line = Line(
+                        start = change.position - dragAmount,
+                        end = change.position
+                    )
 
-                        linesState.add(line)
-                    }, onDragEnd = {
+                    linesState.add(line)
+                }, onDragEnd = {
                         onDragEnd()
                     })
-                }
-        ) {
-            linesState.forEach { line ->
-                drawLine(
-                    color = line.color,
-                    start = line.start,
-                    end = line.end,
-                    strokeWidth = line.strokeWidth.toPx(),
-                    cap = StrokeCap.Round
-                )
             }
+    ) {
+        linesState.forEach { line ->
+            drawLine(
+                color = line.color,
+                start = line.start,
+                end = line.end,
+                strokeWidth = line.strokeWidth.toPx(),
+                cap = StrokeCap.Round
+            )
         }
-
+    }
 }
+
 @Stable
 data class Line(
     val start: Offset,

@@ -23,12 +23,9 @@ class ClassifierViewModel : ViewModel() {
             is ClassifierUiAction.OnReadyToIdentifyNumber -> ClassifierUiState.ReadyToIdentify
             is ClassifierUiAction.OnRestart, is ClassifierUiAction.OnReDraw -> ClassifierUiState.Default
             is ClassifierUiAction.OnCloseErrorDialog -> ClassifierUiState.HideErrorDialog
-            is ClassifierUiAction.OnIdentifyBitmap -> ClassifierUiState.IdentifyImage(bitmap = action.bitmap)
+            is ClassifierUiAction.OnIdentifyBitmap -> ClassifierUiState.IdentifyImage(
+                bitmap = action.bitmap
+            )
         }
     }
 }
-
-
-
-
-

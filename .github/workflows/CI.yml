@@ -35,6 +35,9 @@ jobs:
       - name: Run Unit Tests
         run: ./gradlew test
 
+      - name: Run Ktlint
+        run: ./gradlew ktlintCheck
+
       - name: Install Android Command Line Tools
         run: |
           export ANDROID_HOME=$HOME/android-sdk

@@ -8,7 +8,6 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asAndroidBitmap
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskCompletionSource
-import org.tensorflow.lite.InterpreterApi
 import java.io.FileInputStream
 import java.io.IOException
 import java.nio.ByteBuffer
@@ -16,6 +15,7 @@ import java.nio.ByteOrder
 import java.nio.channels.FileChannel
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
+import org.tensorflow.lite.InterpreterApi
 
 class DigitClassifier(private val context: Context) {
     private var interpreter: InterpreterApi? = null
@@ -58,7 +58,7 @@ class DigitClassifier(private val context: Context) {
         inputImageWidth = inputShape[1]
         inputImageHeight = inputShape[2]
         modelInputSize = FLOAT_TYPE_SIZE * inputImageWidth *
-                inputImageHeight * PIXEL_SIZE
+            inputImageHeight * PIXEL_SIZE
 
         // Finish interpreter initialization.
         this.interpreter = interpreter
@@ -94,7 +94,8 @@ class DigitClassifier(private val context: Context) {
         val result = output[0]
         val maxIndex = result.indices.maxByOrNull { result[it] } ?: -1
         Log.d(
-            TAG, "Prediction Result: %d\nConfidence: %2f"
+            TAG,
+            "Prediction Result: %d\nConfidence: %2f"
                 .format(maxIndex, result[maxIndex])
         )
 
@@ -146,7 +147,6 @@ class DigitClassifier(private val context: Context) {
             byteBuffer.putFloat(normalizedPixelValue)
         }
         return byteBuffer
-
     }
 
     companion object {

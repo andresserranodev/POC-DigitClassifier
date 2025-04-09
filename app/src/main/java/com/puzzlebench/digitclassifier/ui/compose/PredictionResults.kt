@@ -24,7 +24,6 @@ fun PredictionResults(predictedNumber: Int, confidence: Float) {
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxWidth().padding(16.dp)
         ) {
-
             Text(
                 text = stringResource(R.string.classification_success_message),
                 style = MaterialTheme.typography.titleMedium
@@ -33,7 +32,7 @@ fun PredictionResults(predictedNumber: Int, confidence: Float) {
                 text = predictedNumber.toString(),
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 style = MaterialTheme.typography.displayLarge.copy(
-                    fontWeight = FontWeight.Bold,
+                    fontWeight = FontWeight.Bold
                 )
             )
             Text(
@@ -43,7 +42,6 @@ fun PredictionResults(predictedNumber: Int, confidence: Float) {
             )
         }
     }
-
 }
 
 @Preview(showBackground = true)
@@ -53,6 +51,7 @@ fun PredictionResultsPreview() {
         PredictionResults(predictedNumber = 7, confidence = 2F)
     }
 }
+
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun PredictionResultsPreviewDark() {

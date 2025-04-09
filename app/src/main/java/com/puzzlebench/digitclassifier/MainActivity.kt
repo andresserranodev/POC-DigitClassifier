@@ -19,8 +19,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tflite.java.TfLite
-import com.puzzlebench.digitclassifier.tensorflowlite.DigitClassifier.Companion.TAG
 import com.puzzlebench.digitclassifier.tensorflowlite.DigitClassifier
+import com.puzzlebench.digitclassifier.tensorflowlite.DigitClassifier.Companion.TAG
 import com.puzzlebench.digitclassifier.ui.feature.ClassifierScreen
 import com.puzzlebench.digitclassifier.ui.feature.viewModel.ClassifierUiAction
 import com.puzzlebench.digitclassifier.ui.feature.viewModel.ClassifierViewModel
@@ -45,7 +45,10 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalComposeUiApi::class, ExperimentalComposeApi::class)
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
-        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_SECURE,
+            WindowManager.LayoutParams.FLAG_SECURE
+        )
         initializeTasks.addOnSuccessListener {
             Log.d(TAG, "TensorFlow Lite initialized successfully.")
             // Setup digit classifier.
@@ -61,14 +64,14 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
-
             val uiState by classifierViewModel.classifierUiState.collectAsState()
             val uiAction = classifierViewModel::onUiAction
 
             DigitClassifierTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
-                    ClassifierScreen(modifier = Modifier.padding(innerPadding),
+                    ClassifierScreen(
+                        modifier = Modifier.padding(innerPadding),
                         uiState = uiState,
                         restartButtonClicked = { uiAction(ClassifierUiAction.OnRestart) },
                         identifyButtonClicked = { bitmap ->

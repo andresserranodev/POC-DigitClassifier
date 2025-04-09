@@ -7,7 +7,6 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.puzzlebench.digitclassifier.ui.compose.PredictionResults
 import com.puzzlebench.digitclassifier.ui.theme.DigitClassifierTheme
-import kotlinx.coroutines.delay
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,7 +17,6 @@ class PredictionResultsTest {
     @get:Rule
     val composeTestRule = createComposeRule()
     val context: Context = InstrumentationRegistry.getInstrumentation().targetContext
-
 
     @Test
     fun testPredictionResultsDisplayed(): Unit = with(composeTestRule) {

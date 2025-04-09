@@ -26,4 +26,3 @@ fun TitleMessage(modifier: Modifier) {
 fun PreviewTitleMessage() {
     TitleMessage(Modifier)
 }
-

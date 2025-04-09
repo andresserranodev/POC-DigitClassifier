@@ -24,8 +24,8 @@ import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewScreenSizes
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.puzzlebench.digitclassifier.ui.theme.DigitClassifierTheme
 import com.puzzlebench.digitclassifier.R
+import com.puzzlebench.digitclassifier.ui.theme.DigitClassifierTheme
 
 @Composable
 fun ErrorDialog(
@@ -40,13 +40,13 @@ fun ErrorDialog(
                     .fillMaxWidth()
                     .height(250.dp)
                     .padding(16.dp),
-                shape = RoundedCornerShape(16.dp),
+                shape = RoundedCornerShape(16.dp)
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Icon(
                         modifier = Modifier.padding(5.dp),
@@ -68,17 +68,17 @@ fun ErrorDialog(
                     Row(
                         modifier = Modifier
                             .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Center,
+                        horizontalArrangement = Arrangement.Center
                     ) {
                         TextButton(
                             onClick = { onDismissRequest() },
-                            modifier = Modifier.padding(8.dp),
+                            modifier = Modifier.padding(8.dp)
                         ) {
                             Text(stringResource(R.string.dialog_close_button))
                         }
                         TextButton(
                             onClick = { reDrawButtonClick() },
-                            modifier = Modifier.padding(8.dp),
+                            modifier = Modifier.padding(8.dp)
                         ) {
                             Text(stringResource(R.string.dialog_redraw_button))
                         }
