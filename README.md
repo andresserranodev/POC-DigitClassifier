@@ -11,7 +11,9 @@ This repository contains an Android application that demonstrates the implementa
 
 ## Overview
 
-The application is built using Jetpack Compose and implements a CNN model trained on the MNIST dataset. The model was trained using Google Colab, and the resulting TensorFlow Lite model is integrated into the Android application.
+The application is built using Jetpack Compose and implements a CNN model trained on the MNIST dataset. The model was trained using Google Colab, and the resulting TensorFlow Lite model is integrated into the Android application. 
+The CNN model was trained using the MNIST dataset in Google Colab. You can find the training notebook here:
+[Training Notebook](https://github.com/andresserranodev/ColabDigitClassifier/blob/main/DigitClassifier.ipynb)
 
 ## Preview
 ![Preview](https://github.com/andresserranodev/POC-DigitClassifier/blob/main/previews/preview.gif)
@@ -24,10 +26,6 @@ The application is built using Jetpack Compose and implements a CNN model traine
 - Clean architecture implementation
 
 ## Technical Details
-
-### Model Training
-The CNN model was trained using the MNIST dataset in Google Colab. You can find the training notebook here:
-[Training Notebook](https://colab.research.google.com/drive/1UJ-jONtH3Kb-CWAHNGCfUMI08sZBOs3_#scrollTo=9e9huQCrx7wV)
 
 ### Android Implementation
 - Built using Jetpack Compose for modern UI development
