@@ -1,8 +1,10 @@
 package com.puzzlebench.digitclassifier
 
+import com.puzzlebench.digitclassifier.tensorflowlite.DigitClassifierFacade
 import com.puzzlebench.digitclassifier.ui.feature.viewModel.ClassifierUiAction
 import com.puzzlebench.digitclassifier.ui.feature.viewModel.ClassifierUiState
 import com.puzzlebench.digitclassifier.ui.feature.viewModel.ClassifierViewModel
+import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
@@ -17,7 +19,8 @@ class ClassifierViewModelTest {
 
     @Before
     fun setup() {
-        viewModel = ClassifierViewModel()
+        val digitClassifierFacade = mockk<DigitClassifierFacade>()
+        viewModel = ClassifierViewModel(digitClassifierFacade)
     }
 
     @Test

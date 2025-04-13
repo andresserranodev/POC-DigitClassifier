@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.util.Log
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asAndroidBitmap
+import androidx.core.graphics.scale
 import com.google.android.gms.tasks.Task
 import com.google.android.gms.tasks.TaskCompletionSource
 import java.io.FileInputStream
@@ -77,7 +78,7 @@ class DigitClassifier(private val context: Context) {
         return fileChannel.map(FileChannel.MapMode.READ_ONLY, startOffset, declaredLength)
     }
 
-    private fun classify(bitmap: ImageBitmap): Pair<Int, Float> {
+    internal fun classify(bitmap: ImageBitmap): Pair<Int, Float> {
         check(isInitialized) { "TF Lite Interpreter is not initialized yet." }
 
         // Pre-processing: resize the input image to match the model input shape.
@@ -102,15 +103,6 @@ class DigitClassifier(private val context: Context) {
         return Pair(maxIndex, result[maxIndex])
     }
 
-    fun classifyAsync(bitmap: ImageBitmap): Task<Pair<Int, Float>> {
-        val task = TaskCompletionSource<Pair<Int, Float>>()
-        executorService.execute {
-            val result = classify(bitmap)
-            task.setResult(result)
-        }
-        return task.task
-    }
-
     fun close() {
         executorService.execute {
             interpreter?.close()
@@ -122,7 +114,7 @@ class DigitClassifier(private val context: Context) {
         val bitmap = imageBitmap.asAndroidBitmap()
         val mutableBitmap = bitmap.copy(Bitmap.Config.ARGB_8888, true)
         val resizedBitmap =
-            Bitmap.createScaledBitmap(mutableBitmap, inputImageWidth, inputImageHeight, true)
+            mutableBitmap.scale(inputImageWidth, inputImageHeight)
         val byteBuffer = ByteBuffer.allocateDirect(inputImageWidth * inputImageHeight * 4)
         byteBuffer.order(ByteOrder.nativeOrder())
 
