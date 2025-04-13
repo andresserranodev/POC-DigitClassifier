@@ -24,11 +24,11 @@ class DigitClassifierFacade(context: Context) {
         initializeTasks.addOnSuccessListener {
             Log.d(TAG, "TensorFlow Lite initialized successfully.")
             // Setup digit classifier.
-            digitClassifier.initialize().addOnFailureListener { e ->
+            digitClassifier.initialize().addOnFailureListener { digitClassifierError ->
                 Log.e(
                     TAG,
                     "Error to setting up digit classifier.",
-                    e
+                    digitClassifierError
                 )
             }
         }
